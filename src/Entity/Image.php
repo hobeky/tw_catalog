@@ -36,12 +36,8 @@ class Image
      */
     private $date;
 
-    private $params;
-
     public function __construct()
     {
-        $container = new Container();
-        $this->params = $container->getParameterBag();
         $this->date = new \DateTime('now');
     }
 
@@ -64,13 +60,13 @@ class Image
 
     public function getFile(): ?File
     {
-        $file = new File($this->params->get('img_dir') . $this->file);
+        $file = new File($_ENV['IMG_DIR'] . $this->file);
         return $file;
     }
 
-    public function setFile(UploadedFile $file): self
+    public function setFile(?UploadedFile $file): self
     {
-        $file->move($this->params->get('img_dir'));
+        $file->move($_ENV['IMG_DIR']);
         $this->file = $file->getFilename();
         $this->name = $file->getClientOriginalName();
 
@@ -82,7 +78,7 @@ class Image
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(?\DateTimeInterface $date): self
     {
         $this->date = $date;
 
@@ -94,8 +90,8 @@ class Image
      */
     public function removeFile()
     {
-        if (file_exists($this->params->get('img_dir') . $this->file)) {
-            unlink($this->params->get('img_dir') . $this->file);
+        if (file_exists($_ENV['IMG_DIR'] . $this->file)) {
+            unlink($_ENV['IMG_DIR'] . $this->file);
         }
     }
 }
