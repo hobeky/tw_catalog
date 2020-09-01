@@ -19,7 +19,8 @@ class CategoryType extends AbstractType
             ->add('name')
             ->add('parentId')
             ->add('image', FileType::class, [
-                'mapped' => false
+                'mapped' => false,
+                'required' => false
             ]);
     }
 

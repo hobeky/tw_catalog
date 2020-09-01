@@ -40,7 +40,7 @@ class Product
     private $price;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Image::class)
+     * @ORM\ManyToMany(targetEntity=Image::class, cascade={"persist"})
      */
     private $image;
 

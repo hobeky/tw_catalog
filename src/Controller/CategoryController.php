@@ -37,10 +37,13 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            dump($form->get('image')->getData());
-            $image = new Image();
-            $image->setFile($form->get('image')->getData());
-            $category->setImage($image);
+
+                if ($form->get('image')->getData() != null) {
+                    $image = new Image();
+                    $image->setFile($form->get('image')->getData());
+                    $category->setImage($image);
+                }
+
             $entityManager->persist($category);
             $entityManager->flush();
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
@@ -36,6 +37,15 @@ class ProductController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            if ($form->get('image')->getData() != null) {
+                foreach ($form->get('image')->getData() as $formImage){
+                    $image = new Image();
+                    $image->setFile($formImage);
+                    $product->addImage($image);
+                }
+            }
+
             $entityManager->persist($product);
             $entityManager->flush();
 
