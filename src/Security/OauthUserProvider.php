@@ -28,6 +28,10 @@ class OauthUserProvider extends EntityUserProvider implements AccountConnectorIn
         if (null === $user = $this->findUser([$this->properties[$resourceOwnerName] => $username])) {
             $user = new User();
             $user->setEmail($response->getEmail());
+            $user->setIsVerified(true);
+            $user->setFacebookId('');
+            $user->setGoogleId('');
+            $user->setIsVerified(true);
             $user->$setterId($username);
             $user->$setterAccessToken($response->getAccessToken());
 
@@ -89,6 +93,7 @@ class OauthUserProvider extends EntityUserProvider implements AccountConnectorIn
     private function updateUser(UserInterface $user, UserResponseInterface $response)
     {
         $user->setEmail($response->getEmail());
+        $user->setIsVerified(true);
         // TODO: Add more fields?!
 
         $this->em->persist($user);

@@ -36,4 +36,5 @@ services:
             - 'App\Entity\User'
             - {
                   facebook: facebookId
+                  google: googleId
             }

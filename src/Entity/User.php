@@ -9,7 +9,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email", "facebookId", "googleId"}, message="There is already an account with this email")
+ * @ORM\Table(
+ *    uniqueConstraints={
+ *        @ORM\UniqueConstraint(name="unique_id",
+ *            columns={"email", "facebook_id", "google_id"})
+ *    }
+ * )
  */
 class User implements UserInterface
 {
@@ -21,7 +27,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=180)
      */
     private $email;
 
@@ -42,7 +48,7 @@ class User implements UserInterface
     private $isVerified = false;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $facebookId;
 
@@ -50,6 +56,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $facebookAccessToken;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $googleId;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $googleAccessToken;
 
     public function getId(): ?int
     {
@@ -75,7 +91,7 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -102,7 +118,7 @@ class User implements UserInterface
      */
     public function getPassword(): ?string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(?string $password): self
@@ -161,6 +177,30 @@ class User implements UserInterface
     public function setFacebookAccessToken(?string $facebookAccessToken): self
     {
         $this->facebookAccessToken = $facebookAccessToken;
+
+        return $this;
+    }
+
+    public function getGoogleId(): ?string
+    {
+        return $this->googleId;
+    }
+
+    public function setGoogleId(?string $googleId): self
+    {
+        $this->googleId = $googleId;
+
+        return $this;
+    }
+
+    public function getGoogleAccessToken(): ?string
+    {
+        return $this->googleAccessToken;
+    }
+
+    public function setGoogleAccessToken(?string $googleAccessToken): self
+    {
+        $this->googleAccessToken = $googleAccessToken;
 
         return $this;
     }
