@@ -15,10 +15,15 @@
             <th>Name</th>
             <td>{{ category.name }}</td>
         </tr>
-        <tr>
-            <th>image</th>
-            <td><img src="{{ path('image.db', {'id':category.image.id|urlencrypt}) }}" alt="{{ category.image.name }}"></td>
-        </tr>
+        {% if category.image %}
+            <tr>
+                <th>image</th>
+                <td>
+                    <img src="{{ path('image.db', {'id':category.image.id|urlencrypt}) }}"
+                         alt="{{ category.image.name }}">
+                </td>
+            </tr>
+        {% endif %}
         </tbody>
     </table>
 
