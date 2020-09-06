@@ -1,0 +1,5 @@
+{% if path | slice(0, 4) == "http" %}
+    <link rel="stylesheet" href="{{ path }}">
+{% else %}
+    <link rel="stylesheet" href="{{ path }}" integrity="{{ path|sriHash }}" crossorigin="anonymous">
+{% endif %}
