@@ -29,28 +29,27 @@
                                     <label>Password</label>
                                     <input name="password" type="password" class="form-control"
                                            placeholder="Password">
-{#                                    <small class="form-text text-muted">#}
-{#                                        <a href="">{{ 'login.forgot'|trans }}</a>#}
-{#                                    </small>#}
+                                    {# <small class="form-text text-muted"> #}
+                                    {# <a href="">{{ 'login.forgot'|trans }}</a> #}
+                                    {# </small> #}
                                 </div>
-                                <div class="form-group">
-                                    <div class="form-check">
-                                        <span class="form-check-input input-check">
-                                            <span class="input-check__body">
-                                                <input name="remember" class="input-check__input"
-                                                       type="checkbox" id="login-remember">
-                                                <span class="input-check__box"></span>
-                                                <svg class="input-check__icon" width="9px" height="7px">
-                                                    <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#check-9x7"></use>
-                                                </svg>
-                                            </span>
-                                        </span>
-                                        <label class="form-check-label"
-                                               for="login-remember">Remember me</label>
-                                    </div>
-                                </div>
+                                {# <div class="form-group"> #}
+                                {# <div class="form-check"> #}
+                                {# <span class="form-check-input input-check"> #}
+                                {# <span class="input-check__body"> #}
+                                {# <input name="remember" class="input-check__input" #}
+                                {# type="checkbox" id="login-remember"> #}
+                                {# <span class="input-check__box"></span> #}
+                                {# <svg class="input-check__icon" width="9px" height="7px"> #}
+                                {# <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#check-9x7"></use> #}
+                                {# </svg> #}
+                                {# </span> #}
+                                {# </span> #}
+                                {# <label class="form-check-label" #}
+                                {# for="login-remember">Remember me</label> #}
+                                {# </div> #}
+                                {# </div> #}
                                 <input type="hidden" name="_csrf" value="{{ csrf_token('login') }}">
-                                {# <input type="hidden" name="_csrf_token" #}
                                 <button type="submit" class="btn btn-primary mb-1">Login</button>
                             </form>
                             <a class="social-links__link d-inline-flex social-links__link--type--google"

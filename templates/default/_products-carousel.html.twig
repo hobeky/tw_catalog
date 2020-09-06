@@ -1,0 +1,99 @@
+<!-- .block-products-carousel -->
+<div class="block block-products-carousel" data-layout="grid-4" data-mobile-grid-columns="2">
+    <div class="container">
+        <div class="block-header">
+            <h3 class="block-header__title">Featured Products</h3>
+            <div class="block-header__divider"></div>
+            {# <ul class="block-header__groups-list"> #}
+            {# <li> #}
+            {# <button type="button" class="block-header__group  block-header__group--active ">All</button> #}
+            {# </li> #}
+            {# {% for taxon in taxons() %} #}
+            {# <li> #}
+            {# <button type="button" class="block-header__group ">{{ taxon.name }}</button> #}
+            {# </li> #}
+            {# {% endfor %} #}
+            {# </ul> #}
+            <div class="block-header__arrows-list">
+                <button class="block-header__arrow block-header__arrow--left" type="button">
+                    <svg width="7px" height="11px">
+                        <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#arrow-rounded-left-7x11"></use>
+                    </svg>
+                </button>
+                <button class="block-header__arrow block-header__arrow--right" type="button">
+                    <svg width="7px" height="11px">
+                        <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#arrow-rounded-right-7x11"></use>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="block-products-carousel__slider">
+            <div class="block-products-carousel__preloader"></div>
+            <div class="owl-carousel">
+                {% for product in latestProducts %}
+                    <div class="block-products-carousel__column">
+                        <div class="block-products-carousel__cell">
+                            <div class="product-card product-card--hidden-actions ">
+                                <button class="product-card__quickview" type="button" value="{{ product.id }}">
+                                    <svg width="16px" height="16px">
+                                        <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#quickview-16"></use>
+                                    </svg>
+                                    <span class="fake-svg-icon"></span>
+                                </button>
+                                {# <div class="product-card__badges-list"> #}
+                                {# <div class="product-card__badge product-card__badge--new">New</div> #}
+                                {# </div> #}
+                                <div class="product-card__image product-image">
+                                    <a href="{{ path('default.show', {'id': product.id|urlencrypt}) }}"
+                                       class="product-image__body">
+                                        <img class="product-image__img" src="{{ product.image|first|image }}"
+                                             alt="">
+                                    </a>
+                                </div>
+                                <div class="product-card__info">
+                                    <div class="product-card__name">
+                                        <a href="{{ path('default.show', {'id': product.id|urlencrypt}) }}">{{ product.title }}</a>
+                                    </div>
+                                    <div class="product-card__rating">
+{#                                        {% include "partial/_ratingStars.html.twig" with {rating: product.averageRating} %}#}
+                                    </div>
+                                </div>
+                                <div class="product-card__actions">
+                                    <div class="product-card__availability">
+                                        Availability: <span class="text-success">In Stock</span>
+                                    </div>
+                                    <div class="product-card__prices">
+                                        {{ product.price }}
+                                    </div>
+                                    <div class="product-card__buttons">
+                                        <button class="btn btn-primary product-card__addtocart" type="button">Add To
+                                            Cart
+                                        </button>
+                                        <button class="btn btn-secondary product-card__addtocart product-card__addtocart--list"
+                                                type="button">Add To Cart
+                                        </button>
+                                        <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                                                type="button">
+                                            <svg width="16px" height="16px">
+                                                <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#wishlist-16"></use>
+                                            </svg>
+                                            <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                                        </button>
+                                        <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare"
+                                                type="button">
+                                            <svg width="16px" height="16px">
+                                                <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#compare-16"></use>
+                                            </svg>
+                                            <span class="fake-svg-icon fake-svg-icon--compare-16"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- .block-products-carousel / end -->
