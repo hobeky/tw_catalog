@@ -1,3 +1,5 @@
+{% import "partial/_category-submenu.macro.html.twig" as submenu %}
+
 <!-- desktop site__header -->
 <header class="site__header d-lg-block d-none">
     <div class="site-header">
@@ -22,32 +24,32 @@
                     {# </div> #}
                     <div class="topbar__spring"></div>
                     {% if app.user %}
-                    <div class="topbar__item">
-                        <div class="topbar-dropdown">
-                            <button class="topbar-dropdown__btn" type="button">
-                                {{ app.user.username }}
-                                <svg width="7px" height="5px">
-                                    <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#arrow-rounded-down-7x5"></use>
-                                </svg>
-                            </button>
-                            <div class="topbar-dropdown__body">
-                                <!-- .menu -->
-                                <div class="menu menu--layout--topbar ">
-                                    <div class="menu__submenus-container"></div>
-                                    <ul class="menu__list">
-                                        <li class="menu__item">
-                                            <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
-                                            <div class="menu__item-submenu-offset"></div>
-                                            <a class="menu__item-link" href="{{ path('app_logout') }}">
-                                                Logout
-                                            </a>
-                                        </li>
-                                    </ul>
+                        <div class="topbar__item">
+                            <div class="topbar-dropdown">
+                                <button class="topbar-dropdown__btn" type="button">
+                                    {{ app.user.username }}
+                                    <svg width="7px" height="5px">
+                                        <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#arrow-rounded-down-7x5"></use>
+                                    </svg>
+                                </button>
+                                <div class="topbar-dropdown__body">
+                                    <!-- .menu -->
+                                    <div class="menu menu--layout--topbar ">
+                                        <div class="menu__submenus-container"></div>
+                                        <ul class="menu__list">
+                                            <li class="menu__item">
+                                                <!-- This is a synthetic element that allows to adjust the vertical offset of the submenu using CSS. -->
+                                                <div class="menu__item-submenu-offset"></div>
+                                                <a class="menu__item-link" href="{{ path('app_logout') }}">
+                                                    Logout
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- .menu / end -->
                                 </div>
-                                <!-- .menu / end -->
                             </div>
                         </div>
-                    </div>
                     {% endif %}
                 </div>
             </div>
@@ -103,7 +105,35 @@
                                         <div class="departments__links-wrapper">
                                             <div class="departments__submenus-container"></div>
                                             <ul class="departments__links">
-
+                                                {% for category in categories() %}
+                                                    {% if category.categories is not empty %}
+                                                        <li class="departments__item">
+                                                            <a class="departments__item-link" href="">
+                                                                {{ category.name }}
+                                                                <svg class="departments__item-arrow" width="6px"
+                                                                     height="9px">
+                                                                    <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#arrow-rounded-right-6x9"></use>
+                                                                </svg>
+                                                            </a>
+                                                            <div class="departments__submenu departments__submenu--type--menu">
+                                                                <!-- .menu -->
+                                                                <div class="menu menu--layout--classic ">
+                                                                    <div class="menu__submenus-container"></div>
+                                                                    <ul class="menu__list">
+                                                                        {{ submenu.category(category.categories) }}
+                                                                    </ul>
+                                                                </div>
+                                                                <!-- .menu / end -->
+                                                            </div>
+                                                        </li>
+                                                    {% else %}
+                                                        <li class="departments__item">
+                                                            <a class="departments__item-link" href="">
+                                                                {{ category.name }}
+                                                            </a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
                                             </ul>
                                         </div>
                                     </div>
