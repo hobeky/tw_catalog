@@ -3,45 +3,68 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <div class="block">
+        <div class="container">
+            <div class="row mt-4">
+                <div class="col-md-6 d-flex flex-column mx-auto">
+                    <div class="card flex-grow-1 mb-md-0">
+                        <div class="card-body">
+                            <h3 class="card-title">Login</h3>
+                            {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                            {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                            {% if app.user %}
+                                <div class="mb-3">
+                                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                </div>
+                            {% endif %}
+                            <form method="post">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input value="{{ last_username }}" name="email" type="email" class="form-control"
+                                           placeholder="Email" required autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input name="password" type="password" class="form-control"
+                                           placeholder="Password">
+{#                                    <small class="form-text text-muted">#}
+{#                                        <a href="">{{ 'login.forgot'|trans }}</a>#}
+{#                                    </small>#}
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <span class="form-check-input input-check">
+                                            <span class="input-check__body">
+                                                <input name="remember" class="input-check__input"
+                                                       type="checkbox" id="login-remember">
+                                                <span class="input-check__box"></span>
+                                                <svg class="input-check__icon" width="9px" height="7px">
+                                                    <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#check-9x7"></use>
+                                                </svg>
+                                            </span>
+                                        </span>
+                                        <label class="form-check-label"
+                                               for="login-remember">Remember me</label>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="_csrf" value="{{ csrf_token('login') }}">
+                                {# <input type="hidden" name="_csrf_token" #}
+                                <button type="submit" class="btn btn-primary mb-1">Login</button>
+                            </form>
+                            <a class="social-links__link d-inline-flex social-links__link--type--google"
+                               href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}">
+                                <i class="fab fa-google"></i>
+                            </a>
+                            <a class="social-links__link d-inline-flex social-links__link--type--facebook"
+                               href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-{#        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.#}
-{#        See https://symfony.com/doc/current/security/remember_me.html#}
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
-    <hr>
-<a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}">
-    <span>Login with Facebook</span>
-</a>
-<a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}">
-    <span>Login with Google</span>
-</a>
+    </div>
 {% endblock %}
