@@ -30,7 +30,7 @@ class Category
     private $parentId;
 
     /**
-     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="parentId")
+     * @ORM\OneToMany(targetEntity=Category::class, mappedBy="parentId", cascade={"persist", "remove"})
      */
     private $categories;
 
