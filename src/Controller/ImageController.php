@@ -15,11 +15,17 @@ class ImageController extends AbstractController
 {
     /**
      * @ParamDecryptor(params={"id"})
-     * @Route("/upload/{id}", name="db")
+     * @Route("/upload/{id}/{size}", name="db", defaults={"size"=""})
      */
-    public function uploaded(Image $image)
+    public function uploaded(Image $image, string $size)
     {
-        $content = file_get_contents($image->getFile()->getRealPath());
+        if ($size == '') {
+            $path = $image->getFile()->getRealPath();
+        } else {
+            $path = $image->getFile()->getRealPath() . '_' . $size;
+        }
+
+        $content = file_get_contents($path);
 
         $headers = array(
             'Content-Type' => 'image/' . $image->getFile()->guessExtension(),

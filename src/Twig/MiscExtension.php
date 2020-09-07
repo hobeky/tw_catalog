@@ -42,9 +42,9 @@ class MiscExtension extends AbstractExtension
         return 'sha384-' . base64_encode(hash('sha384', file_get_contents(__DIR__ . '/../../public' . $link), true));
     }
 
-    public function image(Image $image): string
+    public function image(Image $image, string $size = ''): string
     {
-        return $this->router->generate('image.db', ['id' => $this->encryptor->encrypt($image->getId())]);
+        return $this->router->generate('image.db', ['id' => $this->encryptor->encrypt($image->getId()), 'size' => $size]);
     }
 
 }

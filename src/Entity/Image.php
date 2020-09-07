@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ImageRepository;
+use App\Services\ImageResize;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\File\File;
@@ -70,6 +71,10 @@ class Image
         $this->file = $file->getFilename();
         $this->name = $file->getClientOriginalName();
 
+        $resizer = new ImageResize($this->getFile()->getRealPath());
+        $resizer->resize('small', $_ENV['SMALL']);
+        $resizer->resize('big', $_ENV['BIG'], 0, 95);
+
         return $this;
     }
 
@@ -92,6 +97,12 @@ class Image
     {
         if (file_exists($_ENV['IMG_DIR'] . $this->file)) {
             unlink($_ENV['IMG_DIR'] . $this->file);
+        }
+        if (file_exists($_ENV['IMG_DIR'] . $this->file)) {
+            unlink($_ENV['IMG_DIR'] . $this->file . '_small');
+        }
+        if (file_exists($_ENV['IMG_DIR'] . $this->file)) {
+            unlink($_ENV['IMG_DIR'] . $this->file . '_big');
         }
     }
 }
