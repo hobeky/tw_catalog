@@ -1,32 +1,32 @@
-{% extends 'base.html.twig' %}
+{% extends '../admin/index.html.twig' %}
 
 {% block title %}Product{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Product</h1>
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ product.title }}</td>
-            </tr>
-            <tr>
-                <th>Text</th>
-                <td>{{ product.text }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ product.price }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ product.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ product.title }}</td>
+        </tr>
+        <tr>
+            <th>Text</th>
+            <td>{{ product.text }}</td>
+        </tr>
+        <tr>
+            <th>CreatedAt</th>
+            <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td>{{ product.price }}</td>
+        </tr>
         </tbody>
     </table>
 
