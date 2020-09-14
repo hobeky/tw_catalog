@@ -3,8 +3,9 @@
 namespace App\Twig;
 
 use App\Entity\Image;
-use App\Entity\Product;
 use Nzo\UrlEncryptorBundle\UrlEncryptor\UrlEncryptor;
+use Symfony\Component\Asset\Package;
+use Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -13,11 +14,13 @@ class MiscExtension extends AbstractExtension
 {
     private RouterInterface $router;
     private UrlEncryptor $encryptor;
+    private Package $package;
 
     public function __construct(RouterInterface $router, UrlEncryptor $encryptor)
     {
         $this->router = $router;
         $this->encryptor = $encryptor;
+        $this->package = new Package(new StaticVersionStrategy('v1'));
     }
 
     public function getFilters(): array
@@ -42,8 +45,17 @@ class MiscExtension extends AbstractExtension
         return 'sha384-' . base64_encode(hash('sha384', file_get_contents(__DIR__ . '/../../public' . $link), true));
     }
 
-    public function image(Image $image, string $size = ''): string
+
+    /**
+     * @param Image|false $image
+     * @param string $size
+     * @return string
+     */
+    public function image($image, string $size = ''): string
     {
+        if (!$image) {
+            return $this->package->getUrl('asset/user/images/no_image.png');
+        }
         return $this->router->generate('image.db', ['id' => $this->encryptor->encrypt($image->getId()), 'size' => $size]);
     }
 
