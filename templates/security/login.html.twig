@@ -11,6 +11,7 @@
                         <div class="card-body">
                             <h3 class="card-title">Login</h3>
                             {% if error %}
+                                {% dump(error) %}
                                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                             {% endif %}
 
@@ -49,7 +50,7 @@
                                 {# for="login-remember">Remember me</label> #}
                                 {# </div> #}
                                 {# </div> #}
-                                <input type="hidden" name="_csrf" value="{{ csrf_token('login') }}">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                                 <button type="submit" class="btn btn-primary mb-1">Login</button>
                             </form>
                             <a class="social-links__link d-inline-flex social-links__link--type--google"
