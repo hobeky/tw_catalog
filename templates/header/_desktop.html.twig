@@ -108,7 +108,7 @@
                                                 {% for category in categories() %}
                                                     {% if category.categories is not empty %}
                                                         <li class="departments__item">
-                                                            <a class="departments__item-link" href="">
+                                                            <a class="departments__item-link" href="{{ path('default.category', {'id': category.id|urlencrypt}) }}">
                                                                 {{ category.name }}
                                                                 <svg class="departments__item-arrow" width="6px"
                                                                      height="9px">
@@ -128,7 +128,7 @@
                                                         </li>
                                                     {% else %}
                                                         <li class="departments__item">
-                                                            <a class="departments__item-link" href="">
+                                                            <a class="departments__item-link" href="{{ path('default.category', {'id': category.id|urlencrypt}) }}">
                                                                 {{ category.name }}
                                                             </a>
                                                         </li>

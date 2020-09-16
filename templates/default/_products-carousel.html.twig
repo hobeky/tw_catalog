@@ -34,7 +34,7 @@
                     <div class="block-products-carousel__column">
                         <div class="block-products-carousel__cell">
                             <div class="product-card product-card--hidden-actions ">
-                                <button class="product-card__quickview" type="button" value="{{ product.id }}">
+                                <button class="product-card__quickview" type="button" value="{{ product.id|urlencrypt }}">
                                     <svg width="16px" height="16px">
                                         <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#quickview-16"></use>
                                     </svg>

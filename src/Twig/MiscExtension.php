@@ -54,7 +54,7 @@ class MiscExtension extends AbstractExtension
     public function image($image, string $size = ''): string
     {
         if (!$image) {
-            return $this->package->getUrl('asset/user/images/no_image.png');
+            return $this->package->getUrl('/asset/user/images/no_image.png');
         }
         return $this->router->generate('image.db', ['id' => $this->encryptor->encrypt($image->getId()), 'size' => $size]);
     }

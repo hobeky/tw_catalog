@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -47,4 +48,15 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function totalInCategory(Category $category):int
+    {
+        return $this->createQueryBuilder('p')
+            ->select('count(p) as total')
+            ->andWhere('p.category = :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getOneOrNullResult()['total']
+            ;
+    }
 }

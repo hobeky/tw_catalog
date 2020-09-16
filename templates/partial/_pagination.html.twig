@@ -1,0 +1,29 @@
+<ul class="pagination justify-content-center">
+    <li class="page-item {{ page <= 0? 'disabled' }}">
+        <a class="page-link page-link--with-arrow"
+           href="{{ path('default.category', {'page': page != 0? page - 1 : 0, 'id': category.id|urlencrypt}) }}#{{ hashtag|default('') }}"
+           aria-label="Previous">
+            <svg class="page-link__arrow page-link__arrow--left" aria-hidden="true"
+                 width="8px" height="13px">
+                <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#arrow-rounded-left-8x13"></use>
+            </svg>
+        </a>
+    </li>
+    {% for pageNumber in range(0, pages < 0? 0 : pages) %}
+        <li class="page-item {{ loop.index0 == page? 'active' }}">
+            <a class="page-link"
+               href="{{ path('default.category', {'page': pageNumber, 'id': category.id|urlencrypt}) }}#{{ hashtag|default('') }}">{{ loop.index }}</a>
+            {{ loop.index == page? '<span class="sr-only">(current)</span>' }}
+        </li>
+    {% endfor %}
+    <li class="page-item {{ page >= pages? 'disabled' }}">
+        <a class="page-link page-link--with-arrow"
+           href="{{ path('default.category', {'page': page != pages? page + 1 : page, 'id': category.id|urlencrypt}) }}#{{ hashtag|default('') }}"
+           aria-label="Next">
+            <svg class="page-link__arrow page-link__arrow--right" aria-hidden="true"
+                 width="8px" height="13px">
+                <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#arrow-rounded-right-8x13"></use>
+            </svg>
+        </a>
+    </li>
+</ul>
