@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Carousel;
 use App\Entity\Product;
 use Doctrine\Persistence\ObjectManager;
 use Nzo\UrlEncryptorBundle\Annotations\ParamDecryptor;
@@ -19,10 +20,12 @@ class DefaultController extends AbstractController
     public function index()
     {
         $product = $this->em()->getRepository(Product::class);
+        $carousel = $this->em()->getRepository(Carousel::class)->findVisibleCarousels();
+
         return $this->render('default/index.html.twig', [
             'menuOpen' => true,
-            'carouselProducts' => $product->findBy([], ['createdAt' => 'DESC'],3),
-            'latestProducts' => $product->findBy([], ['createdAt' => 'DESC'],12)
+            'carouselProducts' => $carousel,
+            'latestProducts' => $product->findBy([], ['createdAt' => 'DESC'],12),
         ]);
     }
 
