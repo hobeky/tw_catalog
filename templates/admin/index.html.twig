@@ -64,6 +64,14 @@
             </a>
         </li>
 
+        <!-- Nav Item - Categories Collapse Menu -->
+        <li class="nav-item {{ app.request.requestUri == path('carousel.index') ? 'active' }}">
+            <a class="nav-link" href="{{ path('carousel.index') }}">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Carousel</span>
+            </a>
+        </li>
+
         <!-- Nav Item - Products Collapse Menu -->
         <li class="nav-item {{ app.request.requestUri == path('product.index') ? 'active' }}">
             <a class="nav-link" href="{{ path('product.index') }}">
