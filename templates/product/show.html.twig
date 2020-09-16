@@ -5,6 +5,11 @@
 {% block content %}
     <h1>Product</h1>
 
+    <div class="row">
+        {% for image in product.image %}
+            <img src="{{ image|image("small") }}" style="max-height: 250px; margin: 20px;">
+        {% endfor %}
+    </div>
     <table class="table">
         <tbody>
         <tr>

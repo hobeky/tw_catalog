@@ -4,6 +4,10 @@
 
 {% block content %}
     <h1>Edit Product</h1>
+    {% for image in product.image %}
+        <img src="{{ image|image("small") }}" style="max-height: 250px; margin: 20px;">
+        <a href="{{ path('image.remove', {'id': image.id}) }}" style="color: red;">X</a>
+    {% endfor %}
 
     {{ include('product/_form.html.twig', {'button_label': 'Update'}) }}
 
