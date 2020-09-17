@@ -11,6 +11,7 @@
             <th>Id</th>
             <th>Email</th>
             <th>Roles</th>
+            <th>Login type</th>
             <th>isVerified</th>
         </tr>
         </thead>
@@ -20,6 +21,15 @@
                 <td>{{ user.id }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles|join(', ') }}</td>
+                <td>
+                    {% if user.password %}
+                        <i class="fas fa-envelope"></i>
+                    {% elseif(user.googleId) %}
+                        <i class="fab fa-google"></i>
+                    {% elseif(user.facebookId) %}
+                        <i class="fab fa-facebook"></i>
+                    {% endif %}
+                </td>
                 <td><a href="{{ path('user.verifyToggle', {'id': user.id}) }}"
                        class="btn {{ user.isVerified? 'btn-success' : 'btn-danger' }}">
                     {{ user.isVerified? 'aktivny' : 'pasivny' }}
