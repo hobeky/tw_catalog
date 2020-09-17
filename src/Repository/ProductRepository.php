@@ -49,14 +49,32 @@ class ProductRepository extends ServiceEntityRepository
     }
     */
 
-    public function totalInCategory(Category $category):int
+    public function totalInCategory(Category $category): int
     {
         return $this->createQueryBuilder('p')
             ->select('count(p) as total')
             ->andWhere('p.category = :category')
             ->setParameter('category', $category)
             ->getQuery()
-            ->getOneOrNullResult()['total']
-            ;
+            ->getOneOrNullResult()['total'];
+    }
+
+    /**
+     * @param string $search
+     * @return int|mixed|string
+     */
+    public function search(string $search)
+    {
+        return $this->createQueryBuilder('p')
+            ->join(Category::class, 'c', 'WITH', 'p.category = c.id')
+            ->select('p')
+            ->orWhere('p.title LIKE :search')
+            ->orWhere('p.text LIKE :search')
+            ->orWhere('p.price LIKE :search')
+            ->orWhere('p.createdAt LIKE :search')
+            ->orWhere('c.name LIKE :search')
+            ->setParameter('search', '%' . $search . '%')
+            ->getQuery()
+            ->getResult();
     }
 }

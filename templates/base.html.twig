@@ -27,6 +27,7 @@
     {% include "partial/_script.html.twig" with {path: asset("asset/user/js/number.js")} %}
     <script>
         let quickViewLink = '{{ path('default.quickview') }}';
+        let suggestionsLink = '{{ path('default.suggestions') }}';
     </script>
     {% include "partial/_script.html.twig" with {path: asset("asset/user/js/main.js")} %}
     {% include "partial/_script.html.twig" with {path: asset("asset/user/js/header.js")} %}

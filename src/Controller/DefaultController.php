@@ -28,7 +28,7 @@ class DefaultController extends AbstractController
         return $this->render('default/index.html.twig', [
             'menuOpen' => true,
             'carouselProducts' => $carousel,
-            'latestProducts' => $product->findBy([], ['createdAt' => 'DESC'],12),
+            'latestProducts' => $product->findBy([], ['createdAt' => 'DESC'], 12),
         ]);
     }
 
@@ -70,6 +70,18 @@ class DefaultController extends AbstractController
 
         return $this->render('default/quickview.html.twig', [
             'product' => $product
+        ]);
+    }
+
+    /**
+     * @Route("/suggestions", name="suggestions")
+     */
+    public function suggestions(Request $request)
+    {
+        $products = $this->em()->getRepository(Product::class)->search($request->get('search'));
+
+        return $this->render('header/suggestions.html.twig', [
+            'products' => $products
         ]);
     }
 
