@@ -67,6 +67,16 @@ class User implements UserInterface
      */
     private $googleAccessToken;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime('now'));
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -201,6 +211,18 @@ class User implements UserInterface
     public function setGoogleAccessToken(?string $googleAccessToken): self
     {
         $this->googleAccessToken = $googleAccessToken;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

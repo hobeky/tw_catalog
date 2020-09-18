@@ -12,6 +12,7 @@
             <th>Email</th>
             <th>Roles</th>
             <th>Login type</th>
+            <th>Created at</th>
             <th>isVerified</th>
         </tr>
         </thead>
@@ -30,6 +31,7 @@
                         <i class="fab fa-facebook"></i>
                     {% endif %}
                 </td>
+                <td>{{ user.createdAt|date }}</td>
                 <td><a href="{{ path('user.verifyToggle', {'id': user.id}) }}"
                        class="btn {{ user.isVerified? 'btn-success' : 'btn-danger' }}">
                     {{ user.isVerified? 'aktivny' : 'pasivny' }}
