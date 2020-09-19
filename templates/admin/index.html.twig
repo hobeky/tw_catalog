@@ -11,15 +11,21 @@
 
     <title>{% block title %}{% endblock %}</title>
 
-    <!-- Custom fonts for this template-->
-    <link href="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css') }}"
-          rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-          rel="stylesheet">
-    {% include "partial/_stylesheet.html.twig" with {path: asset('asset/user/vendor/fontawesome/css/all.min.css')} %}
+    {% block stylesheets %}
+        <!-- Custom fonts for this template-->
+        <link href="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css') }}"
+              rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+              rel="stylesheet">
+        {% include "partial/_stylesheet.html.twig" with {path: asset('asset/user/vendor/fontawesome/css/all.min.css')} %}
 
-    <!-- Custom styles for this template-->
-    <link href="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css') }}" rel="stylesheet">
+        <!-- Custom styles for this template-->
+        <link href="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css') }}"
+              rel="stylesheet">
+
+        {% include "partial/_stylesheet.html.twig" with {path: "https://cdn.datatables.net/v/bs4/dt-1.10.22/b-1.6.4/rr-1.2.7/datatables.min.css"} %}
+        {% include "partial/_stylesheet.html.twig" with {path: "https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css"} %}
+    {% endblock %}
 
 </head>
 
@@ -333,23 +339,30 @@
     </div>
 </div>
 
-<!-- Bootstrap core JavaScript-->
-<script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+{% block javascripts %}
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js') }}"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js') }}"></script>
 
-<!-- Page level plugins -->
-<script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/vendor/chart.js/Chart.min.js') }}"></script>
+    <!-- Page level plugins -->
+    <script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/vendor/chart.js/Chart.min.js') }}"></script>
 
-<!-- Page level custom scripts -->
-<script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js') }}"></script>
-<script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js') }}"></script>
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('assets/admin/startbootstrap-sb-admin-2-gh-pages/js/demo/chart-pie-demo.js') }}"></script>
 
+    {% include "partial/_script.html.twig" with {path: "https://code.jquery.com/jquery-3.5.1.js"} %}
+    {% include "partial/_script.html.twig" with {path: "https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"} %}
+    {% include "partial/_script.html.twig" with {path: "https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"} %}
+    {% include "partial/_script.html.twig" with {path: "https://cdn.datatables.net/rowreorder/1.2.7/js/dataTables.rowReorder.min.js"} %}
+
+{% endblock %}
 </body>
 
 </html>

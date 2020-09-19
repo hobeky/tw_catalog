@@ -50,4 +50,22 @@ class ImageController extends AbstractController
 
         return $this->redirect($request->headers->get('referer'));
     }
+
+    /**
+     * @Route("/images-reorder/", name="imagesReorder", methods={"GET"})
+     */
+    public function imagesReorder(Request $request): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $order = $request->get('order');
+
+        foreach ($order as $rank => $id) {
+            $image = $em->getRepository(Image::class)->find($id);
+            $image->setRank($rank);
+            $em->persist($image);
+        }
+        $em->flush();
+
+        return $this->json('OK');
+    }
 }

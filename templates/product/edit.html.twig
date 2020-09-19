@@ -4,14 +4,82 @@
 
 {% block content %}
     <h1>Edit Product</h1>
-    {% for image in product.image %}
-        <img src="{{ image|image("small") }}" style="max-height: 250px; margin: 20px;">
-        <a href="{{ path('image.remove', {'id': image.id}) }}" style="color: red;">X</a>
-    {% endfor %}
+
+    <table id="imagesDatatable" class="display" style="width:100%" cellspacing="0">
+        <thead>
+        <tr>
+            <th>Order</th>
+            <th>Id</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for image in product.image %}
+            <tr>
+                <td>
+                    {{ loop.index0 }}
+                </td>
+                <td>
+                    {{ image.id }}
+                </td>
+                <td>
+                    <img src="{{ image|image("small") }}" style="max-height: 60px; margin: 5px;">
+                </td>
+                <td>
+                    <a href="{{ path('image.remove', {'id': image.id}) }}" class="btn btn-danger">X</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
     {{ include('product/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('product.index') }}">back to list</a>
 
     {{ include('product/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    
+    <script>
+        $(document).ready(function () {
+            table = $('#imagesDatatable').DataTable({
+                rowReorder: {
+                    selector: 'tr'
+                },
+                columnDefs: [
+                    {
+                        orderable: true, className: 'reorder', targets: 0
+                    },
+                    {
+                        orderable: false, targets: '_all'
+                    },
+                    {
+                        "targets": [1],
+                        "visible": false,
+                        "searchable": false
+                    },
+                ]
+            });
+            table.on('row-reordered', function (e, diff, edit) {
+                var data = {}
+                $.each(table.data(), function (key, val) {
+                    data[val[0]] = (val[1]);
+                })
+                console.log(data);
+                $.ajax({
+                    url: "{{ path('image.imagesReorder') }}",
+                    method: 'get',
+                    data: {'order': data},
+                    success: function (result) {
+                        console.log('items sorted');
+                    }
+                });
+
+            });
+        });
+    </script>
 {% endblock %}

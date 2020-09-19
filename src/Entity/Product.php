@@ -40,7 +40,8 @@ class Product
     private $price;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Image::class, cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=Image::class, cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OrderBy({"rank" = "ASC"})
      */
     private $image;
 
