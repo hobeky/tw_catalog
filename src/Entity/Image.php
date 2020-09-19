@@ -98,10 +98,10 @@ class Image
         if (file_exists($_ENV['IMG_DIR'] . $this->file)) {
             unlink($_ENV['IMG_DIR'] . $this->file);
         }
-        if (file_exists($_ENV['IMG_DIR'] . $this->file)) {
+        if (file_exists($_ENV['IMG_DIR'] . $this->file. '_small')) {
             unlink($_ENV['IMG_DIR'] . $this->file . '_small');
         }
-        if (file_exists($_ENV['IMG_DIR'] . $this->file)) {
+        if (file_exists($_ENV['IMG_DIR'] . $this->file. '_big')) {
             unlink($_ENV['IMG_DIR'] . $this->file . '_big');
         }
     }
