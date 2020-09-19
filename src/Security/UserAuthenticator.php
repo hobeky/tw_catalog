@@ -74,6 +74,11 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
         }
 
+        if ($user->isVerified()==false) {
+            // fail authentication with a custom error
+            throw new CustomUserMessageAuthenticationException('Your account is not active, please contact administrator.');
+        }
+
         return $user;
     }
 
@@ -98,7 +103,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
 //        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
-        return new RedirectResponse($this->urlGenerator->generate('product_index'));
+        return new RedirectResponse($this->urlGenerator->generate('product.index'));
     }
 
     protected function getLoginUrl()
