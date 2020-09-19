@@ -27,7 +27,7 @@ class DefaultController extends AbstractController
 
         return $this->render('default/index.html.twig', [
             'menuOpen' => true,
-            'carouselProducts' => $carousel,
+            'carouselItems' => $carousel,
             'latestProducts' => $product->findBy([], ['createdAt' => 'DESC'], 12),
         ]);
     }

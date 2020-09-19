@@ -7,15 +7,15 @@
             <div class="col-12 col-lg-9">
                 <div class="block-slideshow__body">
                     <div class="owl-carousel">
-                        {% for product in carouselProducts %}
+                        {% for item in carouselItems %}
                             <a class="block-slideshow__slide"
-                               href="{{ path('default.show', {'id': product.id|urlencrypt}) }}">
+                               href="{{ item.link }}">
                                 <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop"
-                                     style="background-size: cover; background-image: url('{{ product.idImage|image }}')"></div>
+                                     style="background-size: cover; background-image: url('{{ item.idImage|image }}')"></div>
                                 <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile"
-                                     style="background-size: cover; background-image: url('{{ product.idImage|image }}')"></div>
+                                     style="background-size: cover; background-image: url('{{ item.idImage|image }}')"></div>
                                 <div class="block-slideshow__slide-content">
-                                    <div class="block-slideshow__slide-title">{{ product.title }}</div>
+                                    <div class="block-slideshow__slide-title">{{ item.title }}</div>
                                     {# <div class="block-slideshow__slide-text">{{ product.shortDescription }}</div> #}
                                     <div class="block-slideshow__slide-button">
                                         <span class="btn btn-primary btn-lg">Go to link</span>

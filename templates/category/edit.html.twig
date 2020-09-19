@@ -5,10 +5,8 @@
 {% block content %}
     <h1>Edit Category</h1>
     {% if category.image %}
-        {% for image in product.image %}
-            <img src="{{ image|image("small") }}" style="max-height: 250px; margin: 20px;">
-            <a href="{{ path('image.remove', {'id': image.id}) }}" style="color: red;">X</a>
-        {% endfor %}
+            <img src="{{ category.image|image("small") }}" style="max-height: 250px; margin: 20px;">
+            <a href="{{ path('image.remove', {'id': category.image.id}) }}" style="color: red;">X</a>
     {% endif %}
 
     {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
