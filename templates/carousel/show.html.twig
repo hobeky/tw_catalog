@@ -1,0 +1,42 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Carousel{% endblock %}
+
+{% block content %}
+    <h1>Carousel</h1>
+    <img src="{{ carousel.idImage|image }}" alt="">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ carousel.id }}</td>
+            </tr>
+            <tr>
+                <th>Index obrázka</th>
+                <td>{{ carousel.indexImage }}</td>
+            </tr>
+            <tr>
+                <th>Link</th>
+                <td>{{ carousel.link }}</td>
+            </tr>
+            <tr>
+                <th>Titulok</th>
+                <td>{{ carousel.title }}</td>
+            </tr>
+            <tr>
+                <th>Je publikované?</th>
+                <td>{{ carousel.isPublished ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Pridané</th>
+                <td>{{ carousel.addedAt ? carousel.addedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('carousel.index') }}">späť na zoznam</a>
+
+    <a href="{{ path('carousel.edit', {'id': carousel.id}) }}">upraviť</a>
+
+    {{ include('carousel/_delete_form.html.twig') }}
+{% endblock %}

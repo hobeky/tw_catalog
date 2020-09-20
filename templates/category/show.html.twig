@@ -1,0 +1,41 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Category{% endblock %}
+
+{% block content %}
+    <h1>Kategória</h1>
+
+    {% if category.image %}
+        {% for image in category.image %}
+            <img src="{{ image|image("small") }}" style="max-height: 250px; margin: 20px;">
+        {% endfor %}
+    {% endif %}
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ category.id }}</td>
+        </tr>
+        <tr>
+            <th>Meno</th>
+            <td>{{ category.name }}</td>
+        </tr>
+        {% if category.image %}
+            <tr>
+                <th>Obrázok</th>
+                <td>
+                    <img src="{{ path('image.db', {'id':category.image.id|urlencrypt}) }}"
+                         alt="{{ category.image.name }}">
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('category.index') }}">späť na zoznam</a>
+
+    <a href="{{ path('category.edit', {'id': category.id}) }}">upraviť</a>
+
+    {{ include('category/_delete_form.html.twig') }}
+{% endblock %}

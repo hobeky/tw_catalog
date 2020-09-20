@@ -1,0 +1,37 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Category index{% endblock %}
+
+{% block content %}
+    <h1>Kategórie</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Názov</th>
+            <th>Nadkategória</th>
+            <th>Akcie</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.parentId }}</td>
+                <td>
+                    <a href="{{ path('category.show', {'id': category.id}) }}">zobraz</a>
+                    <a href="{{ path('category.edit', {'id': category.id}) }}">uprav</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">prázdne</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('category.new') }}">Nová kategória</a>
+{% endblock %}

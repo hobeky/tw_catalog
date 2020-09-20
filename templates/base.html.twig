@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    <!-- fonts -->
+    {% include "partial/_stylesheet.html.twig" with {path: 'https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i'} %}
+    <!-- css -->
+    {% include "partial/_stylesheet.html.twig" with {path: asset('asset/user/vendor/bootstrap/css/bootstrap.min.css')} %}
+    {% include "partial/_stylesheet.html.twig" with {path: asset('asset/user/vendor/owl-carousel/assets/owl.carousel.min.css')} %}
+    {% include "partial/_stylesheet.html.twig" with {path: asset('asset/user/vendor/photoswipe/photoswipe.css')} %}
+    {% include "partial/_stylesheet.html.twig" with {path: asset('asset/user/vendor/photoswipe/default-skin/default-skin.css')} %}
+    {% include "partial/_stylesheet.html.twig" with {path: asset('asset/user/vendor/select2/css/select2.min.css')} %}
+    {% include "partial/_stylesheet.html.twig" with {path: asset('asset/user/css/style.ltr.css')} %}
+    <!-- font - fontawesome -->
+    {% include "partial/_stylesheet.html.twig" with {path: asset('asset/user/vendor/fontawesome/css/all.min.css')} %}
+    <!-- font - stroyka -->
+    {% include "partial/_stylesheet.html.twig" with {path: asset('asset/user/fonts/stroyka/stroyka.css')} %}
+{% endblock %}
+
+{% block javascripts %}
+    {% include "partial/_script.html.twig" with {path: asset("asset/user/vendor/jquery/jquery.min.js")} %}
+    {% include "partial/_script.html.twig" with {path: asset("asset/user/vendor/bootstrap/js/bootstrap.bundle.min.js")} %}
+    {% include "partial/_script.html.twig" with {path: asset("asset/user/vendor/owl-carousel/owl.carousel.min.js")} %}
+    {% include "partial/_script.html.twig" with {path: asset("asset/user/vendor/nouislider/nouislider.min.js")} %}
+    {% include "partial/_script.html.twig" with {path: asset("asset/user/vendor/photoswipe/photoswipe.min.js")} %}
+    {% include "partial/_script.html.twig" with {path: asset("asset/user/vendor/photoswipe/photoswipe-ui-default.min.js")} %}
+    {% include "partial/_script.html.twig" with {path: asset("asset/user/vendor/select2/js/select2.min.js")} %}
+    {% include "partial/_script.html.twig" with {path: asset("asset/user/js/number.js")} %}
+    <script>
+        let quickViewLink = '{{ path('default.quickview') }}';
+        let suggestionsLink = '{{ path('default.suggestions') }}';
+    </script>
+    {% include "partial/_script.html.twig" with {path: asset("asset/user/js/main.js")} %}
+    {% include "partial/_script.html.twig" with {path: asset("asset/user/js/header.js")} %}
+    {% include "partial/_script.html.twig" with {path: asset("asset/user/vendor/svg4everybody/svg4everybody.min.js")} %}
+    <script>
+        svg4everybody();
+    </script>
+{% endblock %}
+
+{% block header %}
+    {% include "header/_mobile.html.twig" %}
+    {% include "header/_desktop.html.twig" %}
+{% endblock %}
+
+{% block footer %}
+{#    {% include "footer/_footer.html.twig" %}#}
+{% endblock %}

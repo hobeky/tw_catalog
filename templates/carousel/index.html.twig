@@ -1,0 +1,43 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Carousel{% endblock %}
+
+{% block content %}
+    <h1>Carousel zoznam</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Index obrázka</th>
+                <th>Link</th>
+                <th>Titulok</th>
+                <th>Je publikované?</th>
+                <th>Pridané</th>
+                <th>Akcie</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for carousel in carousels %}
+            <tr>
+                <td>{{ carousel.id }}</td>
+                <td>{{ carousel.indexImage }}</td>
+                <td>{{ carousel.link }}</td>
+                <td>{{ carousel.title }}</td>
+                <td>{{ carousel.isPublished ? 'Yes' : 'No' }}</td>
+                <td>{{ carousel.addedAt ? carousel.addedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('carousel.show', {'id': carousel.id}) }}">zobraz</a>
+                    <a href="{{ path('carousel.edit', {'id': carousel.id}) }}">uprav</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('carousel.new') }}">Nový carousel</a>
+{% endblock %}
