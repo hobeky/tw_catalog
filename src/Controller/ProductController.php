@@ -38,6 +38,7 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
 
+            $product->setCreatedAt(new \DateTime('now'));
             if ($form->get('image')->getData() != null) {
                 foreach ($form->get('image')->getData() as $formImage) {
                     $image = new Image();

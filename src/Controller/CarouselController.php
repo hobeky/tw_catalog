@@ -39,6 +39,7 @@ class CarouselController extends AbstractController
             $image = new Image();
             $image->setFile($form->get('idImage')->getData());
             $carousel->setIdImage($image);
+            $carousel->setAddedAt(new \DateTime('now'));
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($carousel);

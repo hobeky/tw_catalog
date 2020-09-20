@@ -17,7 +17,6 @@ class CarouselType extends AbstractType
             ->add('link')
             ->add('title')
             ->add('isPublished')
-            ->add('addedAt')
             ->add('idImage', FileType::class, [
                 'mapped' => false,
                 'required' => false
