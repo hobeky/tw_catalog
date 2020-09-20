@@ -20,7 +20,7 @@ class CarouselType extends AbstractType
             ->add('addedAt')
             ->add('idImage', FileType::class, [
                 'mapped' => false,
-                'required' => true
+                'required' => false
             ])
         ;
     }
