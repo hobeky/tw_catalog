@@ -15,11 +15,15 @@
                                 <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile"
                                      style="background-size: cover; background-image: url('{{ item.idImage|image }}')"></div>
                                 <div class="block-slideshow__slide-content">
-                                    <div class="block-slideshow__slide-title">{{ item.title }}</div>
+                                    {% if item.title %}
+                                        <div class="block-slideshow__slide-title">{{ item.title }}</div>
+                                    {% endif %}
                                     {# <div class="block-slideshow__slide-text">{{ product.shortDescription }}</div> #}
-                                    <div class="block-slideshow__slide-button">
-                                        <span class="btn btn-primary btn-lg">Go to link</span>
-                                    </div>
+                                    {% if item.link %}
+                                        <div class="block-slideshow__slide-button">
+                                            <span class="btn btn-primary btn-lg">Ísť na odkaz</span>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </a>
                         {% endfor %}

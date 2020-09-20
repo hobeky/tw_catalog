@@ -3,15 +3,15 @@
 {% block title %}Category index{% endblock %}
 
 {% block content %}
-    <h1>Category index</h1>
+    <h1>Kategórie</h1>
 
     <table class="table">
         <thead>
         <tr>
             <th>Id</th>
-            <th>Name</th>
-            <th>Parent</th>
-            <th>actions</th>
+            <th>Názov</th>
+            <th>Nadkategória</th>
+            <th>Akcie</th>
         </tr>
         </thead>
         <tbody>
@@ -21,17 +21,17 @@
                 <td>{{ category.name }}</td>
                 <td>{{ category.parentId }}</td>
                 <td>
-                    <a href="{{ path('category.show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('category.edit', {'id': category.id}) }}">edit</a>
+                    <a href="{{ path('category.show', {'id': category.id}) }}">zobraz</a>
+                    <a href="{{ path('category.edit', {'id': category.id}) }}">uprav</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">prázdne</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('category.new') }}">Create new</a>
+    <a href="{{ path('category.new') }}">Nová kategória</a>
 {% endblock %}

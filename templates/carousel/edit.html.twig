@@ -1,15 +1,15 @@
 {% extends 'admin/index.html.twig' %}
 
-{% block title %}Edit Carousel{% endblock %}
+{% block title %}Upraviť Carousel{% endblock %}
 
 {% block content %}
-    <h1>Edit Carousel</h1>
+    <h1>Upraviť Carousel</h1>
     <img src="{{ carousel.idImage|image }}" alt="">
     <a href="{{ path('image.remove', {'id': carousel.idImage.id}) }}" style="color: red;">X</a>
 
     {{ include('carousel/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('carousel.index') }}">back to list</a>
+    <a href="{{ path('carousel.index') }}">spať na zoznam</a>
 
     {{ include('carousel/_delete_form.html.twig') }}
 {% endblock %}

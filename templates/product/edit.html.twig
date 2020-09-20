@@ -1,17 +1,17 @@
 {% extends 'admin/index.html.twig' %}
 
-{% block title %}Edit Product{% endblock %}
+{% block title %}Upraviť produkt{% endblock %}
 
 {% block content %}
-    <h1>Edit Product</h1>
+    <h1>Upraviť produktt</h1>
 
     <table id="imagesDatatable" class="display" style="width:100%" cellspacing="0">
         <thead>
         <tr>
-            <th>Order</th>
+            <th>Zoradenie</th>
             <th>Id</th>
-            <th>Image</th>
-            <th>Actions</th>
+            <th>Obrázok</th>
+            <th>Akcie</th>
         </tr>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@
 
     {{ include('product/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('product.index') }}">back to list</a>
+    <a href="{{ path('product.index') }}">späť na zoznam</a>
 
     {{ include('product/_delete_form.html.twig') }}
 {% endblock %}

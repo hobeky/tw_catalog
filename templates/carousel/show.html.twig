@@ -12,7 +12,7 @@
                 <td>{{ carousel.id }}</td>
             </tr>
             <tr>
-                <th>IndexImage</th>
+                <th>Index obrázka</th>
                 <td>{{ carousel.indexImage }}</td>
             </tr>
             <tr>
@@ -20,23 +20,23 @@
                 <td>{{ carousel.link }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Titulok</th>
                 <td>{{ carousel.title }}</td>
             </tr>
             <tr>
-                <th>IsPublished</th>
+                <th>Je publikované?</th>
                 <td>{{ carousel.isPublished ? 'Yes' : 'No' }}</td>
             </tr>
             <tr>
-                <th>AddedAt</th>
+                <th>Pridané</th>
                 <td>{{ carousel.addedAt ? carousel.addedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('carousel.index') }}">back to list</a>
+    <a href="{{ path('carousel.index') }}">späť na zoznam</a>
 
-    <a href="{{ path('carousel.edit', {'id': carousel.id}) }}">edit</a>
+    <a href="{{ path('carousel.edit', {'id': carousel.id}) }}">upraviť</a>
 
     {{ include('carousel/_delete_form.html.twig') }}
 {% endblock %}

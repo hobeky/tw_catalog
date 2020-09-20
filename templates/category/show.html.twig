@@ -3,7 +3,7 @@
 {% block title %}Category{% endblock %}
 
 {% block content %}
-    <h1>Category</h1>
+    <h1>Kategória</h1>
 
     {% if category.image %}
         {% for image in category.image %}
@@ -18,12 +18,12 @@
             <td>{{ category.id }}</td>
         </tr>
         <tr>
-            <th>Name</th>
+            <th>Meno</th>
             <td>{{ category.name }}</td>
         </tr>
         {% if category.image %}
             <tr>
-                <th>image</th>
+                <th>Obrázok</th>
                 <td>
                     <img src="{{ path('image.db', {'id':category.image.id|urlencrypt}) }}"
                          alt="{{ category.image.name }}">
@@ -33,9 +33,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('category.index') }}">back to list</a>
+    <a href="{{ path('category.index') }}">späť na zoznam</a>
 
-    <a href="{{ path('category.edit', {'id': category.id}) }}">edit</a>
+    <a href="{{ path('category.edit', {'id': category.id}) }}">upraviť</a>
 
     {{ include('category/_delete_form.html.twig') }}
 {% endblock %}
