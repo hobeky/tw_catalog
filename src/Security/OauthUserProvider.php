@@ -28,10 +28,9 @@ class OauthUserProvider extends EntityUserProvider implements AccountConnectorIn
         if (null === $user = $this->findUser([$this->properties[$resourceOwnerName] => $username])) {
             $user = new User();
             $user->setEmail($response->getEmail());
-            $user->setIsVerified(true);
+            $user->setIsVerified(false);
             $user->setFacebookId('');
             $user->setGoogleId('');
-            $user->setIsVerified(true);
             $user->$setterId($username);
             $user->$setterAccessToken($response->getAccessToken());
 
