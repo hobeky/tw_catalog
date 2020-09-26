@@ -56,27 +56,28 @@
                                         You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
                                     </div>
                                 {% endif %}
-                                <form class="user">
+                                <form class="user" action="{{ path('app_login') }}" method="post">
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                        <input name="email" type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                        <input name="password" type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                                            <input name="remember" type="checkbox" class="custom-control-input" id="customCheck">
                                             <label class="custom-control-label" for="customCheck">Zapamätať prihlásenie</label>
                                         </div>
                                     </div>
-                                    <a href="../admin/index.html.twig" class="btn btn-primary btn-user btn-block">
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Prihlásiť sa
-                                    </a>
+                                    </button>
                                     <hr>
                                     <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}" class="btn btn-google btn-user btn-block">
                                         <i class="fab fa-google fa-fw"></i> Prihlásenie cez Google
                                     </a>
-                                    <a href="../admin/index.html.twig" class="btn btn-facebook btn-user btn-block">
+                                    <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" class="btn btn-facebook btn-user btn-block">
                                         <i class="fab fa-facebook-f fa-fw"></i> Prihlásenie cez Facebook
                                     </a>
                                 </form>

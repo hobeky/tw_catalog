@@ -43,8 +43,11 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Vytvoriť účet!</h1>
                         </div>
-                        <form class="user">
-                            {{ form_start(registrationForm) }}
+                            {{ form_start(registrationForm, {
+                                'attr': {
+                                    'class': 'user'
+                                }
+                            }) }}
 {#                            <div class="form-group row">#}
 {#                                <div class="col-sm-6 mb-3 mb-sm-0">#}
 {#                                    <input type="text" class="form-control form-control-user" id="exampleFirstName"#}
@@ -78,9 +81,16 @@
                                     } }) }}
                                 </div>
                             </div>
-                            <a href="login.html.twig" class="btn btn-primary btn-user btn-block">
-                                Vytvoriť účet
-                            </a>
+                            {# <a href="login.html.twig" class="btn btn-primary btn-user btn-block"> #}
+                            {# Vytvoriť účet #}
+                            {# </a> #}
+
+                            {{ form_row(registrationForm.submit, {
+                                'label' : 'Vytvoriť účet',
+                                'attr': {
+                                    'class': 'btn btn-primary btn-user btn-block'
+                                }
+                            }) }}
                             <hr>
                             <a href="../admin/index.html.twig" class="btn btn-google btn-user btn-block">
                                 <i class="fab fa-google fa-fw"></i> Prihlásenie cez Google
@@ -89,7 +99,6 @@
                                 <i class="fab fa-facebook-f fa-fw"></i> Prihlásenie cez Facebook
                             </a>
                             {{ form_end(registrationForm) }}
-                        </form>
                         <hr>
                         <div class="text-center">
                             <a class="small" href="#">Zabudnuté heslo?</a>
