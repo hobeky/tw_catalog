@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\User;
+use App\Services\HwiBundleFixUserProvider;
 use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\EntityUserProvider;
@@ -10,7 +11,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class OauthUserProvider extends EntityUserProvider implements AccountConnectorInterface
+class OauthUserProvider extends HwiBundleFixUserProvider implements AccountConnectorInterface
 {
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
