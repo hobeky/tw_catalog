@@ -78,9 +78,22 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $imageEditRedirect = false;
+            if ($form->get('image')->getData() != null) {
+                foreach ($form->get('image')->getData() as $formImage) {
+                    $image = new Image();
+                    $image->setFile($formImage);
+                    $product->addImage($image);
+                    $imageEditRedirect = true;
+                }
+            }
+
+            $entityManager->persist($product);
+            $entityManager->flush();
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('product.index');
+            return ($imageEditRedirect) ? $this->redirectToRoute('product.edit', ['id' => $product->getId()]) : $this->redirectToRoute('product.index');
         }
 
         return $this->render('product/edit.html.twig', [
