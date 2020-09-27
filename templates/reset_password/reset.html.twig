@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Zabudnuté heslo{% endblock %}</title>
 
     {% block stylesheets %}
         <!-- Custom fonts for this template-->
@@ -46,44 +46,44 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Vitajte späť!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Zabudnuté heslo</h1>
                                 </div>
-                                {% if error %}
-                                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                                {% endif %}
-                                {% if app.user %}
-                                    <div class="mb-3">
-                                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                {% for flashError in app.flashes('reset_password_error') %}
+                                    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                                {% endfor %}
+                                {{ form_start(resetForm, {
+                                    'attr': {
+                                        'class': 'user'
+                                    }
+                                }) }}
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        {{ form_row(resetForm.plainPassword.first, { 'attr': {
+                                            'class': 'form-control form-control-user',
+                                            'id' : 'exampleInputPassword',
+                                            'placeholder' : 'Nové heslo'
+                                        } }) }}
                                     </div>
-                                {% endif %}
-                                <form class="user" action="{{ path('app_login') }}" method="post">
-                                    <div class="form-group">
-                                        <input name="email" type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                    <div class="col-sm-6">
+                                        {{ form_row(resetForm.plainPassword.second, { 'attr': {
+                                            'class': 'form-control form-control-user',
+                                            'id' : 'exampleRepeatPassword',
+                                            'placeholder' : 'Overenie hesla'
+                                        } }) }}
                                     </div>
-                                    <div class="form-group">
-                                        <input name="password" type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input name="remember" type="checkbox" class="custom-control-input" id="customCheck">
-                                            <label class="custom-control-label" for="customCheck">Zapamätať prihlásenie</label>
-                                        </div>
-                                    </div>
-                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
-                                        Prihlásiť sa
-                                    </button>
-                                    <hr>
-                                    <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> Prihlásenie cez Google
-                                    </a>
-                                    <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" class="btn btn-facebook btn-user btn-block">
-                                        <i class="fab fa-facebook-f fa-fw"></i> Prihlásenie cez Facebook
-                                    </a>
-                                </form>
+                                </div>
+                                <div>
+                                    <small>
+                                        Vytvorte si nové heslo, ktoré budete používať na prihlasovanie na túto stránku.
+                                    </small>
+                                </div>
+
+                                <button class="btn btn-primary">Potvrdiť nové heslo</button>
+                                {{ form_end(resetForm) }}
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="{{ path('app_forgot_password_request') }}">Zabudnuté heslo?</a>
+                                    <a class="small" href="{{ path('app_forgot_password_request') }}">Zabudnuté
+                                        heslo?</a>
                                 </div>
                                 <div class="text-center">
                                     <a class="small" href="{{ path('app_register') }}">Vytvoriť účet!</a>
