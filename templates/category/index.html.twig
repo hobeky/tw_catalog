@@ -5,7 +5,7 @@
 {% block content %}
     <h1>Kategórie</h1>
 
-    <table class="table">
+    <table class="table" id="categoryDatatable">
         <thead>
         <tr>
             <th>Id</th>
@@ -21,8 +21,10 @@
                 <td>{{ category.name }}</td>
                 <td>{{ category.parentId }}</td>
                 <td>
-                    <a href="{{ path('category.show', {'id': category.id}) }}">zobraz</a>
-                    <a href="{{ path('category.edit', {'id': category.id}) }}">uprav</a>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{ path('category.show', {'id': category.id}) }}" type="button" class="btn btn-primary">zobraz</a>
+                        <a href="{{ path('category.edit', {'id': category.id}) }}" type="button" class="btn btn-warning">uprav</a>
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -34,4 +36,15 @@
     </table>
 
     <a href="{{ path('category.new') }}">Nová kategória</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $(document).ready(function () {
+            $('#categoryDatatable').DataTable();
+        });
+    </script>
 {% endblock %}

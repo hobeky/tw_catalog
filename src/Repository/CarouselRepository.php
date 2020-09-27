@@ -23,8 +23,16 @@ class CarouselRepository extends ServiceEntityRepository
     {
         return $this->findBy(
             ['isPublished' => true],
-            ['indexImage' => 'ASC' ]
+            ['indexImage' => 'ASC']
         );
+    }
+
+    public function countAll(): int
+    {
+        return (int)$this->createQueryBuilder('c')
+            ->select('count(c)')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
     // /**

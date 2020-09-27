@@ -4,8 +4,7 @@
 
 {% block content %}
     <h1>Upraviť Carousel</h1>
-    <img src="{{ carousel.idImage|image }}" alt="">
-    <a href="{{ path('image.remove', {'id': carousel.idImage.id}) }}" style="color: red;">X</a>
+    <img src="{{ carousel.idImage|image('small') }}" alt="">
 
     {{ include('carousel/_form.html.twig', {'button_label': 'Update'}) }}
 
