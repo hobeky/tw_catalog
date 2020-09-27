@@ -22,7 +22,7 @@ class CarouselController extends AbstractController
     public function index(CarouselRepository $carouselRepository): Response
     {
         return $this->render('carousel/index.html.twig', [
-            'carousels' => $carouselRepository->findAll(),
+            'carousels' => $carouselRepository->findBy([], ['indexImage' => 'ASC']),
         ]);
     }
 
@@ -36,12 +36,13 @@ class CarouselController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
             $image = new Image();
             $image->setFile($form->get('idImage')->getData());
             $carousel->setIdImage($image);
+            $carousel->setIndexImage($entityManager->getRepository(Carousel::class)->countAll());
             $carousel->setAddedAt(new \DateTime('now'));
 
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($carousel);
             $entityManager->flush();
 
@@ -52,6 +53,22 @@ class CarouselController extends AbstractController
             'carousel' => $carousel,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/reorder}", name="reorder", methods={"GET"})
+     */
+    public function reorder(Request $request): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        foreach ($request->get('order') as $order => $id) {
+            $carousel = $em->getRepository(Carousel::class)->find($id);
+            $carousel->setIndexImage($order);
+            $em->persist($carousel);
+        }
+        $em->flush();
+
+        return $this->json('OK');
     }
 
     /**
@@ -73,7 +90,12 @@ class CarouselController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($carousel->getIdImage());
+            $image = new Image();
+            $image->setFile($form->get('idImage')->getData());
+            $carousel->setIdImage($image);
+            $em->flush();
 
             return $this->redirectToRoute('carousel.index');
         }
@@ -89,7 +111,7 @@ class CarouselController extends AbstractController
      */
     public function delete(Request $request, Carousel $carousel): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$carousel->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $carousel->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($carousel);
             $entityManager->flush();

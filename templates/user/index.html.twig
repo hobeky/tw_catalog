@@ -5,7 +5,7 @@
 {% block content %}
     <h1>User index</h1>
 
-    <table class="table">
+    <table class="table" id="userDatatable">
         <thead>
         <tr>
             <th>Id</th>
@@ -49,4 +49,15 @@
         {% endfor %}
         </tbody>
     </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $(document).ready(function () {
+            $('#userDatatable').DataTable();
+        });
+    </script>
 {% endblock %}

@@ -5,7 +5,7 @@
 {% block content %}
     <h1>Produkt</h1>
 
-    <table class="table">
+    <table class="table" id="productsDatatable">
         <thead>
         <tr>
             <th>Id</th>
@@ -27,8 +27,10 @@
                 <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ product.price }}</td>
                 <td>
-                    <a href="{{ path('product.show', {'id': product.id}) }}">zobraz</a>
-                    <a href="{{ path('product.edit', {'id': product.id}) }}">uprav</a>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{ path('product.show', {'id': product.id}) }}" type="button" class="btn btn-primary">zobraz</a>
+                        <a href="{{ path('product.edit', {'id': product.id}) }}" type="button" class="btn btn-warning">uprav</a>
+                    </div>
                 </td>
             </tr>
         {% else %}
@@ -40,4 +42,15 @@
     </table>
 
     <a href="{{ path('product.new') }}">Nový produkt</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $(document).ready(function () {
+            $('#productsDatatable').DataTable();
+        });
+    </script>
 {% endblock %}
