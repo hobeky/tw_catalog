@@ -30,6 +30,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
+    private $user;
 
     public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -84,6 +85,7 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
 
     public function checkCredentials($credentials, UserInterface $user)
     {
+        $this->user = $user;
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
@@ -101,9 +103,13 @@ class UserAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
             return new RedirectResponse($targetPath);
         }
 
+        if (in_array("ROLE_ADMIN", $this->user->getRoles())){
+            return new RedirectResponse($this->urlGenerator->generate('product.index'));
+        }
+
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
 //        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
-        return new RedirectResponse($this->urlGenerator->generate('product.index'));
+        return new RedirectResponse($this->urlGenerator->generate('default.index'));
     }
 
     protected function getLoginUrl()
