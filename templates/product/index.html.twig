@@ -1,0 +1,56 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Produkt{% endblock %}
+
+{% block content %}
+    <h1>Produkt</h1>
+
+    <table class="table" id="productsDatatable">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titulok</th>
+            <th>Kategória</th>
+            <th>Text</th>
+            <th>Vytvorené</th>
+            <th>Cena</th>
+            <th>Akcie</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.title }}</td>
+                <td>{{ product.category.name }}</td>
+                <td>{{ product.text }}</td>
+                <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{ path('product.show', {'id': product.id}) }}" type="button" class="btn btn-primary">zobraz</a>
+                        <a href="{{ path('product.edit', {'id': product.id}) }}" type="button" class="btn btn-warning">uprav</a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('product.new') }}">Nový produkt</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $(document).ready(function () {
+            $('#productsDatatable').DataTable();
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    {% block meta %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="format-detection" content="telephone=no">
+    {% endblock %}
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<!-- site -->
+<div class="site">
+    {% block header %}{% endblock %}
+
+    <!-- site__body -->
+    <div class="site__body">
+        {% block body %}{% endblock %}
+    </div>
+
+    {% block footer %}{% endblock %}
+</div>
+
+{% include "partial/_alert.html.twig" %}
+
+{% block javascripts %}{% endblock %}
+</body>
+</html>
