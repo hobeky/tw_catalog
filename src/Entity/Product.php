@@ -110,6 +110,14 @@ class Product
     }
 
     /**
+     * @return string
+     */
+    public function getPriceFormated(): string
+    {
+        return $this->price / 100 . ' €';
+    }
+
+    /**
      * @return float
      */
     public function getPrice(): float

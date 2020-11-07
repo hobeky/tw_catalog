@@ -25,7 +25,7 @@
                 <td>{{ product.category.name }}</td>
                 <td>{{ product.text }}</td>
                 <td>{{ product.createdAt ? product.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ product.price }}</td>
+                <td>{{ product.priceFormated }}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a href="{{ path('default.show', {'id': product.id|urlencrypt}) }}" type="button"
