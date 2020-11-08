@@ -1,0 +1,5 @@
+{% if path | slice(0, 4) == "http" %}
+    <script src="{{ path }}"></script>
+{% else %}
+    <script src="{{ path }}" integrity="{{ path|sriHash }}" crossorigin="anonymous"></script>
+{% endif %}

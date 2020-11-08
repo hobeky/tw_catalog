@@ -1,0 +1,50 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Category index{% endblock %}
+
+{% block content %}
+    <h1>Kategórie</h1>
+
+    <table class="table" id="categoryDatatable">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Názov</th>
+            <th>Nadkategória</th>
+            <th>Akcie</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.parentId }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{ path('category.show', {'id': category.id}) }}" type="button" class="btn btn-primary">zobraz</a>
+                        <a href="{{ path('category.edit', {'id': category.id}) }}" type="button" class="btn btn-warning">uprav</a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">prázdne</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('category.new') }}">Nová kategória</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        $(document).ready(function () {
+            $('#categoryDatatable').DataTable();
+        });
+    </script>
+{% endblock %}

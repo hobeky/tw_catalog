@@ -1,0 +1,20 @@
+<ul class="suggestions__list">
+    {% for product in products %}
+    <li class="suggestions__item">
+        <a class="suggestions__item-link" href="{{ path('default.show', {'id': product.id|urlencrypt}) }}">
+            <div class="suggestions__item-image product-image">
+                <div class="product-image__body">
+                    <img class="product-image__img" src="{{ product.image|first|image('small') }}" alt="">
+                </div>
+            </div>
+            <div class="suggestions__item-info">
+                <div class="suggestions__item-name">{{ product.title }}</div>
+{#                <div class="suggestions__item-meta">SKU: 83690/32</div>#}
+            </div>
+            <div class="suggestions__item-price">
+                {{ product.priceFormated }}
+            </div>
+        </a>
+    </li>
+    {% endfor %}
+</ul>

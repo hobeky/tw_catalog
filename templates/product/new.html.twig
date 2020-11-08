@@ -1,0 +1,11 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Nový produkt{% endblock %}
+
+{% block content %}
+    <h1>Vytvoriť nový produkt</h1>
+
+    {{ include('product/_form.html.twig') }}
+
+    <a href="{{ path('product.index') }}">spať na zoznam</a>
+{% endblock %}

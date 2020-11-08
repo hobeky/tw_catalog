@@ -1,0 +1,16 @@
+<div class="position-fixed" style="bottom: 25px; right: 25px">
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="col-12">
+                <div class="alert alert-{{ label }} alert-lg mb-3 alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <svg width="12px" height="12px">
+                            <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#cross-12"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>

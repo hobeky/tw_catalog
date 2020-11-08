@@ -1,0 +1,8 @@
+<h1>Dobrý deň!</h1>
+
+<p>Na zmenu Vašeho hesla kliknite na link:</p>
+
+<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+
+<p>Tento link je platný {{ tokenLifetime|date('g') }} hodinu.</p>
+

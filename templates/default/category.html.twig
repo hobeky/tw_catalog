@@ -1,0 +1,156 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+        <div class="shop-layout shop-layout--sidebar--start">
+            <div class="shop-layout__content" style="width: 100%">
+                <div class="block">
+                    <div class="products-view">
+                        <div class="products-view__options">
+                            <div class="view-options view-options--offcanvas--mobile">
+                                <div class="view-options__filters-button">
+                                    <button type="button" class="filters-button">
+                                        <svg class="filters-button__icon" width="16px" height="16px">
+                                            <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#filters-16"></use>
+                                        </svg>
+                                        <span class="filters-button__title">Filters</span>
+                                        <span class="filters-button__counter">3</span>
+                                    </button>
+                                </div>
+                                <div class="view-options__layout">
+                                    <div class="layout-switcher">
+                                        <div class="layout-switcher__list">
+                                            <button data-layout="grid-3-sidebar" data-with-features="false" title="Grid"
+                                                    type="button"
+                                                    class="layout-switcher__button  layout-switcher__button--active ">
+                                                <svg width="16px" height="16px">
+                                                    <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#layout-grid-16x16"></use>
+                                                </svg>
+                                            </button>
+{#                                            <button data-layout="grid-3-sidebar" data-with-features="true"#}
+{#                                                    title="Grid With Features" type="button"#}
+{#                                                    class="layout-switcher__button ">#}
+{#                                                <svg width="16px" height="16px">#}
+{#                                                    <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#layout-grid-with-details-16x16"></use>#}
+{#                                                </svg>#}
+{#                                            </button>#}
+                                            <button data-layout="list" data-with-features="false" title="List"
+                                                    type="button" class="layout-switcher__button ">
+                                                <svg width="16px" height="16px">
+                                                    <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#layout-list-16x16"></use>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="view-options__legend">Showing {{ products|length }}
+                                    of {{ total }} products
+                                </div>
+                                <div class="view-options__divider"></div>
+{#                                <div class="view-options__control">#}
+{#                                    <label for="">Sort By</label>#}
+{#                                    <div>#}
+{#                                        <select class="form-control form-control-sm" name="" id="">#}
+{#                                            <option value="">Default</option>#}
+{#                                            <option value="">Name (A-Z)</option>#}
+{#                                        </select>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="view-options__control">#}
+{#                                    <label for="">Show</label>#}
+{#                                    <div>#}
+{#                                        <select class="form-control form-control-sm" name="" id="">#}
+{#                                            <option value="">12</option>#}
+{#                                            <option value="">24</option>#}
+{#                                        </select>#}
+{#                                    </div>#}
+{#                                </div>#}
+                            </div>
+                        </div>
+                        <div class="products-view__list products-list" data-layout="grid-3-sidebar"
+                             data-with-features="false" data-mobile-grid-columns="2">
+                            <div class="products-list__body">
+                                {% for product in products %}
+                                    <div class="products-list__item">
+                                        <div class="product-card product-card--hidden-actions ">
+                                            <button class="product-card__quickview" value="{{ product.id|urlencrypt }}"
+                                                    type="button">
+                                                <svg width="16px" height="16px">
+                                                    <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#quickview-16"></use>
+                                                </svg>
+                                                <span class="fake-svg-icon"></span>
+                                            </button>
+                                            <div class="product-card__image product-image">
+                                                <a href="{{ path('default.show', {'id':product.id|urlencrypt}) }}"
+                                                   class="product-image__body">
+                                                    <img class="product-image__img"
+                                                         src="{{ product.image|first|image('small') }}"
+                                                         alt="">
+                                                </a>
+                                            </div>
+                                            <div class="product-card__info">
+                                                <div class="product-card__name">
+                                                    <a href="{{ path('default.show', {'id':product.id|urlencrypt}) }}">{{ product.title }}</a>
+                                                </div>
+{#                                                <ul class="product-card__features-list">#}
+{#                                                    {% for variant in product.variants %}#}
+{#                                                        {% set axis = variant.axis|first %}#}
+{#                                                        {% if axis %}#}
+{#                                                            <li>{{ attribute(variant.nameAxis, axis) }}</li>#}
+{#                                                        {% endif %}#}
+{#                                                    {% endfor %}#}
+{#                                                </ul>#}
+                                            </div>
+                                            <div class="product-card__actions">
+                                                <div class="product-card__availability">
+                                                    Availability: <span class="text-success">In Stock</span>
+                                                </div>
+                                                <div class="product-card__prices">
+                                                    {{ product.priceFormated }}
+                                                </div>
+                                                <div class="product-card__buttons">
+{#                                                    <button class="btn btn-primary product-card__addtocart"#}
+{#                                                            type="button">#}
+{#                                                        Add To Cart#}
+{#                                                    </button>#}
+{#                                                    <button class="btn btn-secondary product-card__addtocart product-card__addtocart--list"#}
+{#                                                            type="button">Add To Cart#}
+{#                                                    </button>#}
+                                                    <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist"
+                                                            type="button">
+                                                        <svg width="16px" height="16px">
+                                                            <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#wishlist-16"></use>
+                                                        </svg>
+                                                        <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                                                    </button>
+                                                    <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare"
+                                                            type="button">
+                                                        <svg width="16px" height="16px">
+                                                            <use xlink:href="{{ asset('asset/user/images/sprite.svg') }}#compare-16"></use>
+                                                        </svg>
+                                                        <span class="fake-svg-icon fake-svg-icon--compare-16"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="products-view__pagination">
+                            {% include "partial/_pagination.html.twig" with {
+                                category: category,
+                                page: page,
+                                pages: (total / page_limit) | round(0, 'ceil') -1
+                            } %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     {% include "partial/_quickview.html.twig" %}
+{% endblock %}

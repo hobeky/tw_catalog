@@ -1,0 +1,90 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Carousel{% endblock %}
+
+{% block content %}
+    <h1>Carousel zoznam</h1>
+
+    <table class="table" id="carouselDatatable">
+        <thead>
+        <tr>
+            <th>Zoradenie</th>
+            <th>Id</th>
+            <th>Obrázok</th>
+            <th>Link</th>
+            <th>Titulok</th>
+            <th>Je publikované?</th>
+            <th>Pridané</th>
+            <th>Akcie</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for carousel in carousels %}
+            <tr style="cursor: move">
+                <td>{{ loop.index0 }}</td>
+                <td>{{ carousel.id }}</td>
+                <td><img src="{{ carousel.idImage|image('small') }}" class="img-fluid" style="max-height: 50px;"></td>
+                <td>{{ carousel.link }}</td>
+                <td>{{ carousel.title }}</td>
+                <td>{{ carousel.isPublished ? 'Yes' : 'No' }}</td>
+                <td>{{ carousel.addedAt ? carousel.addedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="{{ path('carousel.show', {'id': carousel.id}) }}" type="button" class="btn btn-primary">zobraz</a>
+                        <a href="{{ path('carousel.edit', {'id': carousel.id}) }}" type="button" class="btn btn-warning">uprav</a>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('carousel.new') }}">Nový carousel</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function () {
+            table = $('#carouselDatatable').DataTable({
+                rowReorder: {
+                    selector: 'tr'
+                },
+                columnDefs: [
+                    {
+                        orderable: true, className: 'reorder', targets: 0
+                    },
+                    {
+                        orderable: false, targets: '_all'
+                    },
+                    {
+                        "targets": [1],
+                        "visible": false,
+                        "searchable": false
+                    },
+                ]
+            });
+            table.on('row-reordered', function (e, diff, edit) {
+                var data = {}
+                $.each(table.data(), function (key, val) {
+                    data[val[0]] = (val[1]);
+                })
+                console.log(data);
+                $.ajax({
+                    url: "{{ path('carousel.reorder') }}",
+                    method: 'get',
+                    data: {'order': data},
+                    success: function (result) {
+                        console.log('items sorted');
+                    }
+                });
+
+            });
+        });
+    </script>
+{% endblock %}

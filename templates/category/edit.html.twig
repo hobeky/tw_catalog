@@ -1,0 +1,17 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block title %}Zmena kagegórie{% endblock %}
+
+{% block content %}
+    <h1>Zmena kagegórie</h1>
+    {% if category.image %}
+            <img src="{{ category.image|image("small") }}" style="max-height: 250px; margin: 20px;">
+            <a href="{{ path('image.remove', {'id': category.image.id}) }}" style="color: red;">X</a>
+    {% endif %}
+
+    {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('category.index') }}">spať na zoznam</a>
+
+    {{ include('category/_delete_form.html.twig') }}
+{% endblock %}
