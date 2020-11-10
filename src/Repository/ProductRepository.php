@@ -53,7 +53,8 @@ class ProductRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->select('count(p) as total')
-            ->andWhere('p.category = :category')
+            ->join('p.categories', 'c')
+            ->andWhere('c.id = :category')
             ->setParameter('category', $category)
             ->getQuery()
             ->getOneOrNullResult()['total'];
@@ -66,7 +67,7 @@ class ProductRepository extends ServiceEntityRepository
     public function search(string $search)
     {
         return $this->createQueryBuilder('p')
-            ->join(Category::class, 'c', 'WITH', 'p.category = c.id')
+            ->join(Category::class, 'c', 'WITH', 'p.categories = c.id')
             ->select('p')
             ->orWhere('p.title LIKE :search')
             ->orWhere('p.text LIKE :search')
@@ -77,4 +78,18 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findByCategory(Category $category, int $page = 0): array
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p')
+            ->join('p.categories', 'c')
+            ->andWhere('c.id = :category')
+            ->setParameter('category', $category)
+            ->setFirstResult($_ENV['PAGE_LIMIT'] * $page)
+            ->setMaxResults($_ENV['PAGE_LIMIT'])
+            ->getQuery()
+            ->getResult();
+    }
+
 }

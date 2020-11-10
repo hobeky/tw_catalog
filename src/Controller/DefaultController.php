@@ -49,9 +49,7 @@ class DefaultController extends AbstractController
      */
     public function category(Category $category, int $page = 0)
     {
-        $product = $this->em()->getRepository(Product::class)->findBy([
-            'category' => $category,
-        ], [], $_ENV['PAGE_LIMIT'], $_ENV['PAGE_LIMIT'] * $page);
+        $product = $this->em()->getRepository(Product::class)->findByCategory($category, $page);
 
         return $this->render('default/category.html.twig', [
             'products' => $product,

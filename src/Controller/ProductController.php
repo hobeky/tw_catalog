@@ -81,7 +81,6 @@ class ProductController extends AbstractController
 
             $entityManager->persist($product);
             $entityManager->flush();
-            $this->getDoctrine()->getManager()->flush();
 
             return ($imageEditRedirect) ? $this->redirectToRoute('product.edit', ['id' => $product->getId()]) : $this->redirectToRoute('product.index');
         }

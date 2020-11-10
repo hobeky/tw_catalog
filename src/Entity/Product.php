@@ -46,14 +46,14 @@ class Product
     private $image;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="products")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="products")
      */
-    private $category;
+    private $categories;
 
     public function __construct()
     {
         $this->image = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,14 +159,30 @@ class Product
         return $this;
     }
 
-    public function getCategory(): ?Category
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
     {
-        return $this->category;
+        return $this->categories;
     }
 
-    public function setCategory(?Category $category): self
+    public function addCategory(Category $category): self
     {
-        $this->category = $category;
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            $category->removeProduct($this);
+        }
 
         return $this;
     }
